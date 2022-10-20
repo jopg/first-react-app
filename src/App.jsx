@@ -1,5 +1,12 @@
+import TaskList from "./TaskList";
+
 function App() {
-  return <h1>Hola mundo</h1>;
+  //Dentro del componente principal App añadimos todos los demás componentes que conforman la aplicación
+  return (
+    <div>
+      <TaskList />
+    </div>
+  );
 }
 
 export default App;
