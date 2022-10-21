@@ -5,6 +5,9 @@ function TaskList() {
   //El estado task se inicializa con un array vacio
   //No podemos inicializar task directamente con data, esto como regla se tiene que hacer cuando se cargue el componente, ya que si el componente no se ha cargado, no tenemos acceso a "data"
   const [task, setTask] = useState([]);
+  //Yo me pregunto, si solo vamos a mostrar una lista de tareas de un JSON, para que meterlo en un estado? y bueno, esto sucede por que puede ser que una que se ha renderizado la lista de tareas querramos añadir mas tareas, o queramos modificar una tarea o eliminar una tarea, lo que supone que todos estos cambios se tengan que renderizar nuevamente, y para este tipo de información que no es constante, si no que es dinamica en nuestra página, tenemos que utilizar un estado para mostrarla.
+
+  //La ventaja de dejarle al estado que se encargue de almacenar la informacion, es que cuando esa información cambie, el estado se encargue de renderizarla nuevamente.
 
   //useEffect se va a ejecutar luego de que se carge el componente, por lo que es aquí donde vamos a asignarle a task el json que contiene data
   useEffect(() => {
