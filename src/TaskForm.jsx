@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-function TaskForm() {
+function TaskForm({ createTask }) {
   const [title, setTitle] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault(); //Este metodo previene que el formulario recarge la página al hacer submit
-    console.log(title);
+    createTask(title);
   };
 
   return (
