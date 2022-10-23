@@ -2,10 +2,13 @@ import { useState } from "react";
 
 function TaskForm({ createTask }) {
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault(); //Este metodo previene que el formulario recarge la página al hacer submit
-    createTask(title);
+    createTask({ title, description });
+    setTitle("");
+    setDescription("");
   };
 
   return (
@@ -14,7 +17,14 @@ function TaskForm({ createTask }) {
         type="text"
         placeholder="Escribe tu Tarea"
         onChange={(e) => setTitle(e.target.value)}
+        value={title}
+        autoFocus
       />
+      <textarea
+        placeholder="Descripcion de la tarea"
+        onChange={(e) => setDescription(e.target.value)}
+        value={description}
+      ></textarea>
       <button>Guardar</button>
     </form>
   );

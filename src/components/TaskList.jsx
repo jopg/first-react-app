@@ -1,5 +1,6 @@
 //import { task as data } from "./task"; //Se tuvo que renombrar task como data dentro de este archivo por que se estaban produciendo problemas de conflicto con el nombre de nuestro estado local "task"
 //import { useState, useEffect } from "react";
+import TaskCard from "./TaskCard";
 
 function TaskList(props) {
   //El estado task se inicializa con un array vacio
@@ -27,10 +28,7 @@ function TaskList(props) {
   return (
     <div>
       {props.task.map((task) => (
-        <div key={task.id}>
-          <h1>{task.title}</h1>
-          <p>{task.description}</p>
-        </div>
+        <TaskCard key={task.id} task={task} />
       ))}
     </div>
   );
