@@ -25,12 +25,16 @@ function TaskList() {
 
   //Aqui comprobamos que si el array esta vacio, retornaremos un msj que no hay tareas
   if (task.length === 0) {
-    return <h1>No hay tareas!</h1>;
+    return (
+      <h1 className="text-white text-4xl font-bold text-center">
+        No hay tareas!
+      </h1>
+    );
   }
 
   //Si hay tareas disponibles entonces las retornaremos, recorriendo el objeto con el metodo map, tomando en cuenta el atributo key (que seria el id de cada tarea) para el funcionamiento interno de react
   return (
-    <div>
+    <div className="grid grid-cols-4 gap-2">
       {task.map((task) => (
         <TaskCard key={task.id} task={task} />
       ))}
