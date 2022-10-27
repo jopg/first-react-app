@@ -1,8 +1,12 @@
 //import { task as data } from "./task"; //Se tuvo que renombrar task como data dentro de este archivo por que se estaban produciendo problemas de conflicto con el nombre de nuestro estado local "task"
 //import { useState, useEffect } from "react";
 import TaskCard from "./TaskCard";
+import { TaskContext } from "../context/TaskContext";
+import { useContext } from "react";
 
-function TaskList(props) {
+function TaskList() {
+  const { task } = useContext(TaskContext);
+
   //El estado task se inicializa con un array vacio
   //No podemos inicializar task directamente con data, esto como regla se tiene que hacer cuando se cargue el componente, ya que si el componente no se ha cargado, no tenemos acceso a "data"
 
@@ -20,15 +24,15 @@ function TaskList(props) {
   //ACTUALIZACION: Aqui se nos presento un inconveniente, el componente TaskForm necesita acceder al estado task, pero no puede por que le pertenece a este componente TaskList, (son componetentes hermanos), por lo que el estado task que tiene la información se mueve al componente App (el componente padre), de tal forma que ambos componentes TaskList y TaskForm tengan acceso a este estado a traves de herencia, por lo que en este componente procedo a comentarlos
 
   //Aqui comprobamos que si el array esta vacio, retornaremos un msj que no hay tareas
-  if (props.task.length === 0) {
+  if (task.length === 0) {
     return <h1>No hay tareas!</h1>;
   }
 
   //Si hay tareas disponibles entonces las retornaremos, recorriendo el objeto con el metodo map, tomando en cuenta el atributo key (que seria el id de cada tarea) para el funcionamiento interno de react
   return (
     <div>
-      {props.task.map((task) => (
-        <TaskCard key={task.id} task={task} deleteTask={props.deleteTask} />
+      {task.map((task) => (
+        <TaskCard key={task.id} task={task} />
       ))}
     </div>
   );

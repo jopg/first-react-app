@@ -1,14 +1,40 @@
-import { createContext } from "react";
+import { createContext, useState, useEffect } from "react";
+import { task as data } from "../data/task";
 
 export const TaskContext = createContext();
 
 export function TaskContextProvider(props) {
-  let x = 20;
-  //Por consola aparece 5 veces el valor de 20, cuando deberian ser 4 veces,  segun fazt esto pasa por culpa del useEffect que esta en App.jsx ya que el renderiza una primera vez y luego otra vez la aplicacion, por lo que seria 20 y 20, y 20 20 20 por parte de TaskCard
+  const [task, setTask] = useState([]);
 
-  //Los 20 que aparecen en gris en consola son por el restrict mode de react en main.jsx
+  function createTask(newTask) {
+    setTask([
+      ...task,
+      {
+        title: newTask.title,
+        id: task.length,
+        description: newTask.description,
+      },
+    ]);
+  }
+
+  function deleteTask(taskId) {
+    //Aqui estamos generando un nuevo arreglo con filter donde vamos a comparar todos los objetos con la codicion, sí el elemento cumple la condicion se quedara en el nuevo arreglo, sí no, se elimina del nuevo arreglo. El nuevo arreglo se almacena dentro de setTask para actualizar la lista de tareas
+    setTask(task.filter((task) => task.id !== taskId));
+  }
+
+  useEffect(() => {
+    setTask(data);
+  }, []);
 
   return (
-    <TaskContext.Provider value={x}>{props.children}</TaskContext.Provider>
+    <TaskContext.Provider
+      value={{
+        task,
+        createTask,
+        deleteTask,
+      }}
+    >
+      {props.children}
+    </TaskContext.Provider>
   );
 }
